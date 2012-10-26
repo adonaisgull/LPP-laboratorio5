@@ -3,10 +3,8 @@
 #
 
 class Rpsls
-
-  @beats = {}
-  @computer_choice = nil
-  @human_choice = nil
+  
+  attr_reader :computer_choice, :human_choice
 
   def initialize()
     @beats = {:rock => [:scissors, :lizard], :paper => [:rock, :spock], :scissors => [:paper, :lizard], :lizard => [:paper, :spock], :spock => [:rock, :scissors]}
@@ -23,11 +21,16 @@ class Rpsls
     @computer_choice = @beats.keys.sample
   end
 
-  def play()
+  def play(choice)
+    
+    human_choice(choice)
+    cumputer_choice()
+    puts @human_choice
+    puts @computer_choice
 
-    if @beats[@computer_choice].include? @player_choice
+    if @beats[@computer_choice].include? @human_choice
       winner = "Humano"
-    elsif @beats[@player_choice].include? @computer_choice
+    elsif @beats[@human_choice].include? @computer_choice
       winner = "Ordenador"
     else
       winner = "Ninguno"
