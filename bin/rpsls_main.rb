@@ -1,5 +1,10 @@
+#
+# rpsls_main.rb
+# Main for Class Rpsls
+#
 
 require "rpsls"
 
-partida = Rpsls.new()
-puts "Ganador: #{partida.play("rock")}"
+choice = ARGV.shift
+game = Rpsls.new()
+puts game.play(choice)
