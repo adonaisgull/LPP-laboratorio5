@@ -13,12 +13,20 @@ class Rpsls
   end
 
   def human_choice(choice)
-    human_choice = (choice || '').to_sym
-    if @moves_available.include? human_choice
-      @human_choice = human_choice
+
+    @human_choice = nil
+
+    if choice.class == String
+      human_choice = (choice || '').to_sym
+      if @moves_available.include? human_choice
+        @human_choice = human_choice
+      else
+        @human_choice = nil
+      end
+    
     else
-      @human_choice = nil
-    end 
+      raise "You must give me a move in a string."
+    end
   end
 
   def cumputer_choice()
@@ -30,9 +38,8 @@ class Rpsls
     human_choice(choice)
     cumputer_choice()
 
-    if @human_choice == nil
-      result = "You must select a valid move. These moves are available: #{@moves_available.join(', ')}."
-    else
+    if @human_choice != nil
+
       if @beats[@computer_choice].include? @human_choice
         result = "Computer wins. #{@computer_choice.capitalize} beats #{@human_choice.capitalize}."
       elsif @beats[@human_choice].include? @computer_choice
@@ -40,6 +47,9 @@ class Rpsls
       else
         result = "It's a draw."
       end
+
+    else
+      result = "You must give me a valid move. Select one of them: #{@moves_available.join(', ')}."
     end
 
     result
