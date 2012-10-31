@@ -12,12 +12,14 @@ class TestRpsls < Test::Unit::TestCase
     @rpsls = Rpsls.new
   end
   
+  # test para comprobar que si no recibe el tipo de dato esperazo se lanza una excepcion
   def test_datatype
     assert_raise(RuntimeError) { @rpsls.play(:symbol) }
     assert_raise(RuntimeError) { @rpsls.play({}) }
     assert_raise(RuntimeError) { @rpsls.play(21) }
   end
   
+  # metodo necesario para el test de repuesta valida
   def valid_answer(result)
     return true if (result =~ /Human wins. (\w+) beats (\w+)./) 
     return true if (result =~ /Computer wins. (\w+) beats (\w+)/)
@@ -25,6 +27,7 @@ class TestRpsls < Test::Unit::TestCase
     return true if (result =~ /You must give me a valid move. Select one of them: *./)
   end
 
+  # test para comprobar si la respuesta obtenida es valida, que no correcta
   def test_valid_answer
     20.times do
       assert valid_answer(@rpsls.play('rock'))
@@ -47,11 +50,8 @@ class TestRpsls < Test::Unit::TestCase
     end
 
   end
-
-  def test_correct_result
-
-  end
   
+  # test para comprobar que el ordenador al menos una vez cada una de las jugadas
   def test_computer_choice
 
     computer_choices = []

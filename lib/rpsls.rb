@@ -18,14 +18,12 @@ class Rpsls
 
     if choice.class == String
       human_choice = (choice || '').to_sym
-      if @moves_available.include? human_choice
+      if @moves_available.include? human_choice		# si choice es una jugada valida la guaramos en @human_choice convertida en simbolo
         @human_choice = human_choice
-      else
-        @human_choice = nil
       end
     
     else
-      raise "You must give me a move in a string."
+      raise "You must give me a move in a string." # lanzamos una excepción porque choice no es un string
     end
   end
 
@@ -35,11 +33,11 @@ class Rpsls
 
   def play(choice)
     
-    human_choice(choice)
-    cumputer_choice()
+    human_choice(choice)	# le damos un valor esperado a @human_choice
+    cumputer_choice()		# le damos un valor esperado a @computer_choice
 
     if @human_choice != nil
-
+      # preparamos el resultado a mostrar
       if @beats[@computer_choice].include? @human_choice
         result = "Computer wins. #{@computer_choice.capitalize} beats #{@human_choice.capitalize}."
       elsif @beats[@human_choice].include? @computer_choice
@@ -52,7 +50,7 @@ class Rpsls
       result = "You must give me a valid move. Select one of them: #{@moves_available.join(', ')}."
     end
 
-    result
+    result	# retornamos el resultado
   end
 end
 
